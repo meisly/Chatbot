@@ -35,7 +35,7 @@ ChatBot::~ChatBot()
     std::cout << "ChatBot Destructor" << std::endl;
 
     // deallocate heap memory
-    if(_image != NULL) // Attention: wxWidgets used NULL and not nullptr
+    if(_image != NULL ) // Attention: wxWidgets used NULL and not nullptr
     {
         delete _image;
         _image = NULL;
@@ -44,7 +44,56 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
+ChatBot::ChatBot(ChatBot &source)
+{
+    std::cout << "Copy Constructor" << std::endl;
+    _image = source._image;
+    source._image = nullptr;
+}
+ChatBot& ChatBot::operator=(ChatBot &source)
+{
+    std::cout << "Copy Assignment" << std::endl;
+    _image = source._image;
+    source._image = nullptr;
+    return *this;
+}
 
+ChatBot::ChatBot (ChatBot &&source) // You can move the ChatBot
+{
+    std::cout << "Move Constructor" << std::endl;
+    
+    // deallocate heap memory
+    if(source._image != NULL ) // Attention: wxWidgets used NULL and not nullptr
+    {
+        _image = source._image;
+        delete source._image;
+        source._image = NULL;
+    }
+    else
+    {
+        std::cout << "Move Constructor failed " <<std::endl;
+    }
+    
+}
+ChatBot& ChatBot::operator=(ChatBot &&source)
+{
+    std::cout << "Move Assignment" << std::endl;
+    std::cout << "MOVING (assign) instance " << &source << " to instance " << this << std::endl;
+    if (this == &source)
+            return *this;
+    // deallocate heap memory
+    if(_image != NULL ) // Attention: wxWidgets used NULL and not nullptr
+    {
+        _image = source._image;
+        delete source._image;
+        source._image = NULL;
+    }
+    else
+    {
+        std::cout << "Move Assignment failed " <<std::endl;
+    }
+    return *this;
+}
 ////
 //// EOF STUDENT CODE
 

@@ -29,6 +29,12 @@ public:
 
     //// STUDENT CODE
     ////
+    ChatBot(ChatBot &source);  //Copy is exclusive.  There can be only 1.
+    ChatBot &operator=(ChatBot &source);  //Copy is exclusive.  There can be only 1.
+
+    ChatBot(ChatBot &&source); // You can move the ChatBot
+
+    ChatBot &operator=(ChatBot &&source); //This is a move assignment.  Also okay.
 
     ////
     //// EOF STUDENT CODE
