@@ -2,6 +2,7 @@
 #define GRAPHEDGE_H_
 
 #include <vector>
+#include <memory>
 #include <string>
 
 class GraphNode; // forward declaration
@@ -10,8 +11,8 @@ class GraphEdge
 {
 private:
     // data handles (not owned)
-    GraphNode *_childNode;
-    GraphNode *_parentNode;
+    GraphNode* _childNode;
+    GraphNode* _parentNode;
 
     // proprietary members
     int _id;
@@ -21,12 +22,13 @@ private:
 public:
     // constructor / desctructor
     GraphEdge(int id);
+    ~GraphEdge();
 
     // getter / setter
     int GetID() { return _id; }
-    void SetChildNode(GraphNode *childNode);
-    void SetParentNode(GraphNode *parentNode);
-    GraphNode *GetChildNode() { return _childNode; }
+    void SetChildNode(GraphNode* childNode);
+    void SetParentNode(GraphNode* parentNode);
+    GraphNode* GetChildNode() { return _childNode; }
     std::vector<std::string> GetKeywords() { return _keywords; }
 
     // proprietary functions

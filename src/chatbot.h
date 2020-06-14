@@ -2,6 +2,7 @@
 #define CHATBOT_H_
 
 #include <wx/bitmap.h>
+#include <memory>
 #include <string>
 
 class GraphNode; // forward declaration
@@ -11,7 +12,7 @@ class ChatBot
 {
 private:
     // data handles (owned)
-    wxBitmap *_image; // avatar image
+    std::shared_ptr<wxBitmap> _image; // avatar image
 
     // data handles (not owned)
     GraphNode *_currentNode;
@@ -29,8 +30,8 @@ public:
 
     //// STUDENT CODE
     ////
-    ChatBot(ChatBot &source);  //Copy is exclusive.  There can be only 1.
-    ChatBot &operator=(ChatBot &source);  //Copy is exclusive.  There can be only 1.
+    ChatBot(ChatBot &source);  
+    ChatBot &operator=(ChatBot &source);  
 
     ChatBot(ChatBot &&source); // You can move the ChatBot
 
@@ -40,10 +41,10 @@ public:
     //// EOF STUDENT CODE
 
     // getters / setters
-    void SetCurrentNode(GraphNode *node);
-    void SetRootNode(GraphNode *rootNode) { _rootNode = rootNode; }
-    void SetChatLogicHandle(ChatLogic *chatLogic) { _chatLogic = chatLogic; }
-    wxBitmap *GetImageHandle() { return _image; }
+    void SetCurrentNode(GraphNode* node);
+    void SetRootNode(GraphNode* rootNode) { _rootNode = rootNode; }
+    void SetChatLogicHandle(ChatLogic* chatLogic) { _chatLogic = chatLogic; }
+    std::shared_ptr<wxBitmap> GetImageHandle() { return _image; }
 
     // communication
     void ReceiveMessageFromUser(std::string message);

@@ -17,8 +17,8 @@ private:
     ////
 
     // data handles (owned)
-    std::vector<GraphNode *> _nodes;
-    std::vector<GraphEdge *> _edges;
+    std::vector<std::unique_ptr<GraphNode>> _nodes;
+    std::vector<GraphEdge*> _edges;
 
     ////
     //// EOF STUDENT CODE
@@ -48,7 +48,7 @@ public:
     void LoadAnswerGraphFromFile(std::string filename);
     void SendMessageToChatbot(std::string message);
     void SendMessageToUser(std::string message);
-    wxBitmap *GetImageFromChatbot();
+    std::shared_ptr<wxBitmap> GetImageFromChatbot();
 };
 
 #endif /* CHATLOGIC_H_ */
